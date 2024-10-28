@@ -8,7 +8,7 @@ namespace NorthwindCRUD.Repository
         Customer GetById(string CustomerId);
         bool Create(Customer customer);
         bool Update(Customer customer);
-        bool Delete(Customer customer);
+        bool Delete(string CustomerId);
         bool SaveChanges();
     }
 }

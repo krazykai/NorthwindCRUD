@@ -49,17 +49,14 @@ namespace NorthwindCRUD.Repository
             }
         }
 
-        public bool Delete(Customer customer)
+        public bool Delete(string CustomerId)
         {
-            if (customer == null)
+            var deleteCustomer = _context.Customers.Find(CustomerId);
+            if (deleteCustomer != null)
             {
-                throw new ArgumentNullException(nameof(customer));
+                _context.Customers.Remove(deleteCustomer);
             }
-            else
-            {
-                this._context.Entry(customer).State = EntityState.Deleted;
-                return this.SaveChanges();
-            }
+            return this.SaveChanges();
         }
 
         public bool SaveChanges()
