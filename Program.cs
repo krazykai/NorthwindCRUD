@@ -1,4 +1,19 @@
+using DotNetEnv;
+
 var builder = WebApplication.CreateBuilder(args);
+
+/* ConnectionString */
+// 載入 .env 檔案
+Env.Load();
+// 取得連線字串
+string connectionString = builder.Configuration.GetConnectionString("mssql");
+// 將 .env 的環境變數代入 appsettings.json 中對應的變數
+connectionString = connectionString
+    .Replace("${DB_SERVER}", Environment.GetEnvironmentVariable("DB_SERVER"))
+    .Replace("${DB_NAME}", Environment.GetEnvironmentVariable("DB_NAME"))
+    .Replace("${DB_USER}", Environment.GetEnvironmentVariable("DB_USER"))
+    .Replace("${DB_PASSWORD}", Environment.GetEnvironmentVariable("DB_PASSWORD"));
+
 
 // Add services to the container.
 
