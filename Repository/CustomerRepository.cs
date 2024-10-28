@@ -66,9 +66,9 @@ namespace NorthwindCRUD.Repository
                 _context.SaveChanges();
                 return true;
             }
-            catch
+            catch (Exception ex)
             {
-                return false;
+                throw;
             }
         }
     }
