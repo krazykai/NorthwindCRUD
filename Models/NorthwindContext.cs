@@ -31,9 +31,7 @@ public partial class NorthwindContext : DbContext
                 .HasColumnName("CustomerID");
             entity.Property(e => e.Address).HasMaxLength(60);
             entity.Property(e => e.City).HasMaxLength(15);
-            entity.Property(e => e.CompanyName)
-                .IsRequired()
-                .HasMaxLength(40);
+            entity.Property(e => e.CompanyName).HasMaxLength(40);
             entity.Property(e => e.ContactName).HasMaxLength(30);
             entity.Property(e => e.ContactTitle).HasMaxLength(30);
             entity.Property(e => e.Country).HasMaxLength(15);

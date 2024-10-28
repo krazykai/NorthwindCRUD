@@ -1,4 +1,7 @@
 using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+using Northwind.Models;
+using NorthwindCRUD.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,8 +17,12 @@ connectionString = connectionString
     .Replace("${DB_USER}", Environment.GetEnvironmentVariable("DB_USER"))
     .Replace("${DB_PASSWORD}", Environment.GetEnvironmentVariable("DB_PASSWORD"));
 
+/* Add services to the container. */
+// DbContext
+builder.Services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
+// Repository
+builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
