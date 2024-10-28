@@ -2,6 +2,7 @@ using DotNetEnv;
 using Microsoft.EntityFrameworkCore;
 using Northwind.Models;
 using NorthwindCRUD.Repository;
+using NorthwindCRUD.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,10 +19,14 @@ connectionString = connectionString
     .Replace("${DB_PASSWORD}", Environment.GetEnvironmentVariable("DB_PASSWORD"));
 
 /* Add services to the container. */
+// AutoMapper
+builder.Services.AddAutoMapper(typeof(Program));
 // DbContext
 builder.Services.AddDbContext<NorthwindContext>(options => options.UseSqlServer(connectionString));
 // Repository
 builder.Services.AddScoped<ICustomerRepository, CustomerRepository>();
+// Service
+builder.Services.AddScoped<ICustomerService, CustomerService>();
 
 
 builder.Services.AddControllers();
